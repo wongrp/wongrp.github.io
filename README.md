@@ -1,4 +1,4 @@
 # Ryan Wong
-## Physics student @ OSU
-Hello 
+Physics student @ OSU
+
 
