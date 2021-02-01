@@ -1,4 +1,4 @@
-Ryan Wong
+Ryan Wong \
 Physics student @ OSU 
 
 Read my <a href = "bio.html"> bio </a>, 
