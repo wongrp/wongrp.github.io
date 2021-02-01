@@ -1,4 +1,5 @@
 title: Ryan Wong
 theme: jekyll-theme-minimal
 description: Physics @ OSU
-show_downloads: "true" 
+github:
+is\_project\_page:false
