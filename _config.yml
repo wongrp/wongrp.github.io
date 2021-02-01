@@ -1,3 +1,4 @@
 theme: jekyll-theme-minimal
 # Disable default github link
-is_project_page: false
+github:
+  is_project_page: false
