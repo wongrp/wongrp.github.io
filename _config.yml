@@ -1,5 +1,2 @@
-name: placeholder
-title: null
-theme: jekyll-theme-primer
-description: Physics student @ OSU
-show_downloads: false
+name: Ryan Wong
+markdown: kramdown # what version of md we want to use.
