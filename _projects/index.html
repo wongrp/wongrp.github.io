@@ -1,0 +1,43 @@
+---
+layout: default
+title: Projects
+---
+
+<h1>Projects</h1>
+
+<h2>Active</h2>
+<ul>
+  {% assign active = site.projects | where: "status", "active" %}
+  {% for proj in active %}
+    <li>
+      <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
+      — {{ proj.summary }}
+    </li>
+  {% endfor %}
+</ul>
+
+<h2>Incubating</h2>
+<ul>
+  {% assign incubating = site.projects | where: "status", "incubating" %}
+  {% for proj in incubating %}
+    <li>
+      <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
+      — {{ proj.summary }}
+    </li>
+  {% endfor %}
+</ul>
+
+<h2>Archived</h2>
+<ul>
+  {% assign archived = site.projects | where: "status", "archive" %}
+  {% if archived.size == 0 %}
+    <li><em>No archived projects yet.</em></li>
+  {% else %}
+    {% for proj in archived %}
+      <li>
+        <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
+        — {{ proj.summary }}
+      </li>
+    {% endfor %}
+  {% endif %}
+</ul>

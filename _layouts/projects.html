@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ "/css/main.css" | relative_url }}">
+  </head>
+  <body>
+    <div class="site-wrapper">
+
+      {% include header.html %}
+
+      <main class="page-content">
+        <article class="project-page">
+          <header class="project-header">
+            <h1>{{ page.title }}</h1>
+            <p class="project-status">
+              <strong>Status:</strong> {{ page.status | capitalize }}
+              {% if page.stage %} &mdash; {{ page.stage }}{% endif %}
+            </p>
+            {% if page.summary %}
+              <p class="project-summary">{{ page.summary }}</p>
+            {% endif %}
+          </header>
+
+          <section class="project-body">
+            {{ content }}
+          </section>
+
+          {% if page.meta %}
+          <section class="project-meta">
+            <h2>Meta</h2>
+            <ul>
+              {% for item in page.meta %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </section>
+          {% endif %}
+
+          {% if page.links %}
+          <section class="project-links">
+            <h2>Links</h2>
+            <ul>
+              {% for link in page.links %}
+                <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+              {% endfor %}
+            </ul>
+          </section>
+          {% endif %}
+        </article>
+      </main>
+
+      {% include footer.html %}
+
+    </div>
+  </body>
+</html>
