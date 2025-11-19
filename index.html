@@ -1,11 +1,463 @@
----
-layout: default
-title: Ryan Wong
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ryan Wong – Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --text: #111827;
+      --text-soft: #6b7280;
+      --accent: #d90429;
+      --border: #e5e7eb;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      --max-width: 960px;
+    }
 
-<div class="blurb">
-	<img src="{{ site.base }}assets/img/brownie.jpg" style="float: right; margin:0px; padding: 0px 0px 0px 0px;" align="right" width=120px height=120px/>
-	<h1> Ryan Wong</h1>
-	<p> Physics student @ <a href="https://physics.oregonstate.edu/mission-statement"> OSU </a></p>
-</div><!-- /.blurb -->
-<!-- Jekyll replaces content in default.html with contents of any file with layout:default  -->
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      padding: 24px 16px 48px;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wordmark {
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .nav {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: inherit;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 120ms ease-out, color 120ms ease-out;
+    }
+
+    .nav a:hover {
+      border-bottom-color: var(--text-soft);
+      color: #111827;
+    }
+
+    .hero {
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+    }
+
+    .hero-main {
+      max-width: 560px;
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 3vw, 30px);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .hero-sub code {
+      font-size: 12px;
+      background: #e5e7eb;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .hero-meta {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero-meta {
+        margin-top: 4px;
+      }
+    }
+
+    main {
+      margin-top: 12px;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 20px 20px 16px;
+    }
+
+    section + section {
+      margin-top: 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .project-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 12px 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    @media (max-width: 720px) {
+      .project {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .project-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .project-name {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .project-name a.project-link-title {
+      text-decoration: none;
+      color: inherit;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+      transition: border-color 120ms ease-out, color 120ms ease-out;
+    }
+
+    .project-name a.project-link-title:hover {
+      color: #111827;
+      border-bottom-color: #111827;
+    }
+
+    .project-status {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+      white-space: nowrap;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+
+    .project-meta {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 6px;
+    }
+
+    .project-meta span + span::before {
+      content: "•";
+      padding: 0 6px;
+    }
+
+    .project-links {
+      font-size: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+    }
+
+    .project-links a {
+      text-decoration: none;
+      color: var(--text-soft);
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+      transition: color 120ms ease-out, border-color 120ms ease-out;
+    }
+
+    .project-links a:hover {
+      color: #111827;
+      border-bottom-color: #111827;
+    }
+
+    .project-links span.label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .project-empty {
+      font-size: 13px;
+      color: var(--text-soft);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    footer {
+      max-width: var(--max-width);
+      margin: 12px auto 0;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .noscript-warning {
+      font-size: 13px;
+      color: var(--text-soft);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="top-bar">
+        <div class="wordmark">Ryan Wong</div>
+        <nav class="nav">
+          <a href="#active">Active</a>
+          <a href="#incubating">Incubating</a>
+          <a href="#archive">Archive</a>
+        </nav>
+      </div>
+      <div class="hero">
+        <div class="hero-main">
+          <h1 class="hero-title">Project index</h1>
+          <p class="hero-sub">
+            All projects live in <code>projects.yaml</code>. Edit that file and run
+            <code>python3 build_projects.py</code> to regenerate <code>projects.json</code>.
+            Click a project title to open its detail page.
+          </p>
+        </div>
+        <div class="hero-meta" id="last-updated">
+          <!-- filled from JSON -->
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="active">
+        <div class="section-title">Active projects</div>
+        <div class="project-list" id="active-list">
+          <noscript>
+            <div class="noscript-warning">
+              This page expects JavaScript to build the project list from <code>projects.json</code>.
+              Enable JavaScript, or open <code>projects.json</code> directly to view and edit projects.
+            </div>
+          </noscript>
+        </div>
+      </section>
+
+      <section id="incubating">
+        <div class="section-title">Incubating / on deck</div>
+        <div class="project-list" id="incubating-list"></div>
+      </section>
+
+      <section id="archive">
+        <div class="section-title">Archive</div>
+        <div class="project-list" id="archive-list"></div>
+      </section>
+    </main>
+
+    <footer>
+      To update projects, edit <code>projects.yaml</code>, then run
+      <code>python3 build_projects.py</code> to regenerate <code>projects.json</code>.
+      Commit all three: <code>index.html</code>, <code>projects.yaml</code>, <code>projects.json</code>.
+    </footer>
+  </div>
+
+  <script>
+    async function loadProjects() {
+      try {
+        const response = await fetch('projects.json', { cache: 'no-store' });
+        if (!response.ok) {
+          console.error('Failed to load projects.json:', response.status);
+          return;
+        }
+        const data = await response.json();
+        renderProjects(data);
+      } catch (err) {
+        console.error('Error loading projects.json:', err);
+      }
+    }
+
+    function createProjectElement(project) {
+      const article = document.createElement('article');
+      article.className = 'project';
+
+      const left = document.createElement('div');
+      const titleRow = document.createElement('div');
+      titleRow.className = 'project-title-row';
+
+      const nameEl = document.createElement('div');
+      nameEl.className = 'project-name';
+
+      if (project.slug) {
+        const link = document.createElement('a');
+        link.className = 'project-link-title';
+        link.href = 'project.html?slug=' + encodeURIComponent(project.slug);
+        link.textContent = project.title || '';
+        nameEl.appendChild(link);
+      } else {
+        nameEl.textContent = project.title || '';
+      }
+
+      const statusEl = document.createElement('div');
+      statusEl.className = 'project-status';
+      statusEl.textContent = project.stage || project.status || '';
+
+      titleRow.appendChild(nameEl);
+      titleRow.appendChild(statusEl);
+
+      const descEl = document.createElement('p');
+      descEl.className = 'project-desc';
+      descEl.textContent = project.summary || '';
+
+      left.appendChild(titleRow);
+      left.appendChild(descEl);
+
+      if (Array.isArray(project.meta) && project.meta.length > 0) {
+        const metaEl = document.createElement('div');
+        metaEl.className = 'project-meta';
+        project.meta.forEach((m) => {
+          const span = document.createElement('span');
+          span.textContent = m;
+          metaEl.appendChild(span);
+        });
+        left.appendChild(metaEl);
+      }
+
+      const right = document.createElement('div');
+      right.className = 'project-links';
+
+      const label = document.createElement('span');
+      label.className = 'label';
+      label.textContent = 'Links';
+      right.appendChild(label);
+
+      if (Array.isArray(project.links)) {
+        project.links.forEach((link) => {
+          if (!link.url) return;
+          const a = document.createElement('a');
+          a.href = link.url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = link.label || link.url;
+          right.appendChild(a);
+        });
+      }
+
+      article.appendChild(left);
+      article.appendChild(right);
+
+      return article;
+    }
+
+    function renderSection(listId, projects) {
+      const container = document.getElementById(listId);
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      if (!projects || projects.length === 0) {
+        const div = document.createElement('div');
+        div.className = 'project-empty';
+        div.textContent = 'No projects listed here yet.';
+        container.appendChild(div);
+        return;
+      }
+
+      projects.forEach((project) => {
+        const el = createProjectElement(project);
+        container.appendChild(el);
+      });
+    }
+
+    function renderProjects(data) {
+      if (data.lastUpdated) {
+        const metaEl = document.getElementById('last-updated');
+        if (metaEl) {
+          metaEl.textContent = 'Last updated · ' + data.lastUpdated;
+        }
+      }
+
+      const projects = Array.isArray(data.projects) ? data.projects : [];
+
+      const active = projects.filter((p) => p.status === 'active');
+      const incubating = projects.filter((p) => p.status === 'incubating');
+      const archive = projects.filter((p) => p.status === 'archive');
+
+      renderSection('active-list', active);
+      renderSection('incubating-list', incubating);
+      renderSection('archive-list', archive);
+    }
+
+    loadProjects();
+  </script>
+</body>
+</html>
