@@ -1,5 +1,5 @@
 ---
-title: Lab dashboard
+title: Lab page
 ---
 
 <!DOCTYPE html>
@@ -17,7 +17,44 @@ title: Lab dashboard
       padding: 24px 16px 48px;
     }
     .page { max-width: 960px; margin: 0 auto; }
-    h1 { font-size: 26px; margin-bottom: 8px; }
+
+    header {
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .title {
+      font-size: 26px;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .back-link {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6b7280;
+    }
+
+    .back-link a {
+      text-decoration: none;
+      color: inherit;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+    }
+
+    .back-link a:hover {
+      border-bottom-color: #6b7280;
+    }
+
     .project {
       background: #ffffff;
       border-radius: 16px;
@@ -25,16 +62,30 @@ title: Lab dashboard
       padding: 14px 16px;
       margin-bottom: 12px;
     }
+
     .project-header {
       display: flex;
       justify-content: space-between;
       gap: 8px;
       margin-bottom: 4px;
     }
+
     .project-header h2 {
       font-size: 16px;
       margin: 0;
     }
+
+    .project-header h2 a {
+      text-decoration: none;
+      color: #111827;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+    }
+
+    .project-header h2 a:hover {
+      border-bottom-color: #111827;
+    }
+
     .status {
       font-size: 11px;
       text-transform: uppercase;
@@ -42,7 +93,13 @@ title: Lab dashboard
       color: #6b7280;
       white-space: nowrap;
     }
-    .summary { font-size: 13px; color: #6b7280; margin-bottom: 6px; }
+
+    .summary {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
     .links, .private-links {
       font-size: 12px;
       display: flex;
@@ -50,6 +107,7 @@ title: Lab dashboard
       gap: 4px 10px;
       margin-bottom: 6px;
     }
+
     .label {
       font-size: 10px;
       letter-spacing: 0.14em;
@@ -57,31 +115,61 @@ title: Lab dashboard
       color: #6b7280;
       margin-right: 4px;
     }
+
     a {
       text-decoration: none;
       color: #374151;
       border-bottom: 1px solid transparent;
       padding-bottom: 1px;
     }
+
     a:hover {
       border-bottom-color: #374151;
     }
+
     .notes {
       font-size: 12px;
       color: #111827;
       white-space: pre-wrap;
       margin-top: 4px;
     }
+
+    .latest-update {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .latest-update span.label {
+      margin-right: 2px;
+    }
   </style>
 </head>
 <body>
   <div class="page">
-    <h1>Lab dashboard</h1>
-    <p style="font-size:13px;color:#6b7280;margin-bottom:12px;">
-      Internal view: shows public + private links and notes for each project.
-    </p>
+    <header>
+      <div>
+        <h1 class="title">Lab dashboard</h1>
+        <p class="subtitle">
+          Internal view: shows public + lab-facing info for each project.
+          Private drafts stay in the repo but aren’t rendered here.
+        </p>
+      </div>
+      <div class="back-link">
+        <a href="{{ "/" | relative_url }}">← Back to index</a>
+      </div>
+    </header>
 
     {% for project in site.projects %}
+      {% comment %}
+        Collect updates for this project:
+        - project == project.slug
+        - visibility != "private" (so we see public + lab)
+      {% endcomment %}
+      {% assign all_updates = site.project_updates | where: "project", project.slug %}
+      {% assign sorted_updates = all_updates | sort: "date" | reverse %}
+      {% assign lab_updates = sorted_updates | where_exp: "u", "u.visibility != 'private'" %}
+
       <article class="project">
         <div class="project-header">
           <h2><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
@@ -114,6 +202,15 @@ title: Lab dashboard
 
         {% if project.private_notes %}
           <div class="notes">{{ project.private_notes }}</div>
+        {% endif %}
+
+        {% if lab_updates.size > 0 %}
+          {% assign latest = lab_updates[0] %}
+          <div class="latest-update">
+            <span class="label">Latest update</span>
+            {{ latest.date | date: "%Y-%m-%d" }}
+            {% if latest.title %} — {{ latest.title }}{% endif %}
+          </div>
         {% endif %}
       </article>
     {% endfor %}

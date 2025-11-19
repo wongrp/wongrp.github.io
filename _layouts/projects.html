@@ -173,6 +173,44 @@
       padding: 1px 4px;
       border-radius: 4px;
     }
+
+    .updates-separator {
+      margin: 20px 0;
+      border: none;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .updates {
+      margin-top: 4px;
+    }
+
+    .updates-title {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .update-list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 13px;
+    }
+
+    .update-item {
+      margin-bottom: 10px;
+    }
+
+    .update-date {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+      margin-bottom: 1px;
+    }
+
+    .update-title {
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
   </style>
 </head>
 <body>
@@ -218,10 +256,6 @@
         {{ content }}
       </div>
 
-            <div class="content">
-        {{ content }}
-      </div>
-
       {% comment %}
         Project updates: all docs in _project_updates with project == page.slug
         We sort them by date (newest first) and only show visibility == "public"
@@ -232,17 +266,17 @@
       {% assign public_updates = sorted_updates | where: "visibility", "public" %}
 
       {% if public_updates.size > 0 %}
-        <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
+        <hr class="updates-separator">
         <section class="updates">
-          <h2 style="font-size:15px; margin-bottom: 8px;">Updates</h2>
-          <ul style="list-style:none; padding-left:0; font-size:13px;">
+          <h2 class="updates-title">Updates</h2>
+          <ul class="update-list">
             {% for u in public_updates %}
-              <li style="margin-bottom:10px;">
-                <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:#6b7280;">
+              <li class="update-item">
+                <div class="update-date">
                   {{ u.date | date: "%Y-%m-%d" }}
                 </div>
                 {% if u.title %}
-                  <div style="font-weight:500; margin-bottom:2px;">{{ u.title }}</div>
+                  <div class="update-title">{{ u.title }}</div>
                 {% endif %}
                 <div>
                   {{ u.content | markdownify }}
@@ -252,8 +286,6 @@
           </ul>
         </section>
       {% endif %}
-
-
     </main>
   </div>
 </body>
