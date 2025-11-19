@@ -11,19 +11,21 @@ summary: >
 meta:
   - PDBBind refined / general
   - CASF-2016 benchmark
+
+# shown on public pages
 links:
-  - label: Overleaf paper PDF
+  - label: Paper draft (Overleaf)
     url: "#"
-  - label: Code repository
+
+# shown only on your private dashboard
+private_links:
+  - label: Internal notes doc
     url: "#"
-  - label: Project notes
+  - label: Scratch notebook
     url: "#"
+
+private_notes: |
+  - Todo: rerun CASF-2016 with new pooling.
+  - Check consistency of apo/holo preprocessing.
 ---
-
-Longer-form notes about the project can go here. This might include:
-
-- What you're actually trying to show.
-- Current bottlenecks or questions.
-- A rough roadmap of next experiments.
-
-You can keep this fairly free-form; it's just for you.
+Public-facing description here (what you already have).
