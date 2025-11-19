@@ -1,3 +1,0 @@
-name: Ryan Wong
-markdown: kramdown # what version of md we want to use.
-permalink: /blog/:year/:month/:day/:title # gives blog posts a permalink. 
