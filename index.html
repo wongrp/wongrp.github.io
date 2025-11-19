@@ -1,8 +1,13 @@
+---
+title: Ryan Wong – Projects
+last_updated: 2025-11-19
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ryan Wong – Projects</title>
+  <title>{{ page.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -265,13 +270,6 @@
       font-size: 11px;
       color: var(--text-soft);
     }
-
-    .noscript-warning {
-      font-size: 13px;
-      color: var(--text-soft);
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
   </style>
 </head>
 <body>
@@ -289,175 +287,160 @@
         <div class="hero-main">
           <h1 class="hero-title">Project index</h1>
           <p class="hero-sub">
-            All projects live in <code>projects.yaml</code>. Edit that file and run
-            <code>python3 build_projects.py</code> to regenerate <code>projects.json</code>.
-            Click a project title to open its detail page.
+            Projects are markdown files in <code>_projects/</code>. Edit those files
+            and push to update this page. Click a project title to open its detail page.
           </p>
         </div>
-        <div class="hero-meta" id="last-updated">
-          <!-- filled from JSON -->
+        <div class="hero-meta">
+          {% if page.last_updated %}
+            Last updated · {{ page.last_updated }}
+          {% endif %}
         </div>
       </div>
     </header>
 
     <main>
+      {% assign active = site.projects | where: "status", "active" %}
+      {% assign incubating = site.projects | where: "status", "incubating" %}
+      {% assign archive = site.projects | where: "status", "archive" %}
+
       <section id="active">
         <div class="section-title">Active projects</div>
-        <div class="project-list" id="active-list">
-          <noscript>
-            <div class="noscript-warning">
-              This page expects JavaScript to build the project list from <code>projects.json</code>.
-              Enable JavaScript, or open <code>projects.json</code> directly to view and edit projects.
-            </div>
-          </noscript>
+        <div class="project-list">
+          {% if active.size == 0 %}
+            <div class="project-empty">No projects listed here yet.</div>
+          {% else %}
+            {% for project in active %}
+              <article class="project">
+                <div>
+                  <div class="project-title-row">
+                    <div class="project-name">
+                      <a class="project-link-title" href="{{ project.url | relative_url }}">
+                        {{ project.title }}
+                      </a>
+                    </div>
+                    <div class="project-status">
+                      {{ project.stage | default: project.status }}
+                    </div>
+                  </div>
+                  {% if project.summary %}
+                    <p class="project-desc">{{ project.summary }}</p>
+                  {% endif %}
+                  {% if project.meta %}
+                    <div class="project-meta">
+                      {% for item in project.meta %}
+                        <span>{{ item }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="project-links">
+                  <span class="label">Links</span>
+                  {% if project.links %}
+                    {% for link in project.links %}
+                      <a href="{{ link.url }}">{{ link.label }}</a>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </article>
+            {% endfor %}
+          {% endif %}
         </div>
       </section>
 
       <section id="incubating">
         <div class="section-title">Incubating / on deck</div>
-        <div class="project-list" id="incubating-list"></div>
+        <div class="project-list">
+          {% if incubating.size == 0 %}
+            <div class="project-empty">No projects listed here yet.</div>
+          {% else %}
+            {% for project in incubating %}
+              <article class="project">
+                <div>
+                  <div class="project-title-row">
+                    <div class="project-name">
+                      <a class="project-link-title" href="{{ project.url | relative_url }}">
+                        {{ project.title }}
+                      </a>
+                    </div>
+                    <div class="project-status">
+                      {{ project.stage | default: project.status }}
+                    </div>
+                  </div>
+                  {% if project.summary %}
+                    <p class="project-desc">{{ project.summary }}</p>
+                  {% endif %}
+                  {% if project.meta %}
+                    <div class="project-meta">
+                      {% for item in project.meta %}
+                        <span>{{ item }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="project-links">
+                  <span class="label">Links</span>
+                  {% if project.links %}
+                    {% for link in project.links %}
+                      <a href="{{ link.url }}">{{ link.label }}</a>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </article>
+            {% endfor %}
+          {% endif %}
+        </div>
       </section>
 
       <section id="archive">
         <div class="section-title">Archive</div>
-        <div class="project-list" id="archive-list"></div>
+        <div class="project-list">
+          {% if archive.size == 0 %}
+            <div class="project-empty">No archived projects yet.</div>
+          {% else %}
+            {% for project in archive %}
+              <article class="project">
+                <div>
+                  <div class="project-title-row">
+                    <div class="project-name">
+                      <a class="project-link-title" href="{{ project.url | relative_url }}">
+                        {{ project.title }}
+                      </a>
+                    </div>
+                    <div class="project-status">
+                      {{ project.stage | default: project.status }}
+                    </div>
+                  </div>
+                  {% if project.summary %}
+                    <p class="project-desc">{{ project.summary }}</p>
+                  {% endif %}
+                  {% if project.meta %}
+                    <div class="project-meta">
+                      {% for item in project.meta %}
+                        <span>{{ item }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="project-links">
+                  <span class="label">Links</span>
+                  {% if project.links %}
+                    {% for link in project.links %}
+                      <a href="{{ link.url }}">{{ link.label }}</a>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </article>
+            {% endfor %}
+          {% endif %}
+        </div>
       </section>
     </main>
 
     <footer>
-      To update projects, edit <code>projects.yaml</code>, then run
-      <code>python3 build_projects.py</code> to regenerate <code>projects.json</code>.
-      Commit all three: <code>index.html</code>, <code>projects.yaml</code>, <code>projects.json</code>.
+      Projects are defined in markdown files under <code>_projects/</code>.
+      Edit those files and push to update this page.
     </footer>
   </div>
-
-  <script>
-    async function loadProjects() {
-      try {
-        const response = await fetch('projects.json', { cache: 'no-store' });
-        if (!response.ok) {
-          console.error('Failed to load projects.json:', response.status);
-          return;
-        }
-        const data = await response.json();
-        renderProjects(data);
-      } catch (err) {
-        console.error('Error loading projects.json:', err);
-      }
-    }
-
-    function createProjectElement(project) {
-      const article = document.createElement('article');
-      article.className = 'project';
-
-      const left = document.createElement('div');
-      const titleRow = document.createElement('div');
-      titleRow.className = 'project-title-row';
-
-      const nameEl = document.createElement('div');
-      nameEl.className = 'project-name';
-
-      if (project.slug) {
-        const link = document.createElement('a');
-        link.className = 'project-link-title';
-        link.href = 'project.html?slug=' + encodeURIComponent(project.slug);
-        link.textContent = project.title || '';
-        nameEl.appendChild(link);
-      } else {
-        nameEl.textContent = project.title || '';
-      }
-
-      const statusEl = document.createElement('div');
-      statusEl.className = 'project-status';
-      statusEl.textContent = project.stage || project.status || '';
-
-      titleRow.appendChild(nameEl);
-      titleRow.appendChild(statusEl);
-
-      const descEl = document.createElement('p');
-      descEl.className = 'project-desc';
-      descEl.textContent = project.summary || '';
-
-      left.appendChild(titleRow);
-      left.appendChild(descEl);
-
-      if (Array.isArray(project.meta) && project.meta.length > 0) {
-        const metaEl = document.createElement('div');
-        metaEl.className = 'project-meta';
-        project.meta.forEach((m) => {
-          const span = document.createElement('span');
-          span.textContent = m;
-          metaEl.appendChild(span);
-        });
-        left.appendChild(metaEl);
-      }
-
-      const right = document.createElement('div');
-      right.className = 'project-links';
-
-      const label = document.createElement('span');
-      label.className = 'label';
-      label.textContent = 'Links';
-      right.appendChild(label);
-
-      if (Array.isArray(project.links)) {
-        project.links.forEach((link) => {
-          if (!link.url) return;
-          const a = document.createElement('a');
-          a.href = link.url;
-          a.target = '_blank';
-          a.rel = 'noopener';
-          a.textContent = link.label || link.url;
-          right.appendChild(a);
-        });
-      }
-
-      article.appendChild(left);
-      article.appendChild(right);
-
-      return article;
-    }
-
-    function renderSection(listId, projects) {
-      const container = document.getElementById(listId);
-      if (!container) return;
-
-      container.innerHTML = '';
-
-      if (!projects || projects.length === 0) {
-        const div = document.createElement('div');
-        div.className = 'project-empty';
-        div.textContent = 'No projects listed here yet.';
-        container.appendChild(div);
-        return;
-      }
-
-      projects.forEach((project) => {
-        const el = createProjectElement(project);
-        container.appendChild(el);
-      });
-    }
-
-    function renderProjects(data) {
-      if (data.lastUpdated) {
-        const metaEl = document.getElementById('last-updated');
-        if (metaEl) {
-          metaEl.textContent = 'Last updated · ' + data.lastUpdated;
-        }
-      }
-
-      const projects = Array.isArray(data.projects) ? data.projects : [];
-
-      const active = projects.filter((p) => p.status === 'active');
-      const incubating = projects.filter((p) => p.status === 'incubating');
-      const archive = projects.filter((p) => p.status === 'archive');
-
-      renderSection('active-list', active);
-      renderSection('incubating-list', incubating);
-      renderSection('archive-list', archive);
-    }
-
-    loadProjects();
-  </script>
 </body>
 </html>
