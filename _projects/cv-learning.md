@@ -15,6 +15,17 @@ links:
     url: ""
   - label: Analysis notebook
     url: "#"
+
+# shown only on your private dashboard
+private_links:
+  - label: Internal notes doc
+    url: "#"
+  - label: Scratch notebook
+    url: "#"
+
+private_notes: |
+  - Todo: rerun CASF-2016 with new pooling.
+  - Check consistency of apo/holo preprocessing.
 ---
 
 Intuitively, the state coupling idea identifies *overlaps* between states. 

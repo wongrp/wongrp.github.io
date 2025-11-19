@@ -12,7 +12,8 @@
       --text-soft: #6b7280;
       --accent: #d90429;
       --border: #e5e7eb;
-      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont,
+                   "SF Pro Text", "Segoe UI", sans-serif;
       --max-width: 960px;
     }
 
@@ -29,9 +30,7 @@
 
     .page { max-width: var(--max-width); margin: 0 auto; }
 
-    header {
-      margin-bottom: 20px;
-    }
+    header { margin-bottom: 20px; }
 
     .top-bar {
       display: flex;
@@ -143,12 +142,19 @@
       font-size: 14px;
       line-height: 1.6;
       color: var(--text);
+      margin-top: 4px;
     }
 
     .content h2 {
       font-size: 15px;
       margin-top: 18px;
       margin-bottom: 6px;
+    }
+
+    .content h3 {
+      font-size: 14px;
+      margin-top: 14px;
+      margin-bottom: 4px;
     }
 
     .content ul, .content ol {
@@ -159,6 +165,13 @@
 
     .content p + p {
       margin-top: 8px;
+    }
+
+    .content code {
+      font-size: 12px;
+      background: #e5e7eb;
+      padding: 1px 4px;
+      border-radius: 4px;
     }
   </style>
 </head>
