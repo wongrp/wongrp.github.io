@@ -2,3 +2,6 @@ collections:
   projects:
     output: true
     permalink: /projects/:slug/
+
+  project_updates:
+    output: false    # they don’t need their own pages; we’ll render them inside projects

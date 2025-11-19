@@ -217,6 +217,43 @@
       <div class="content">
         {{ content }}
       </div>
+
+            <div class="content">
+        {{ content }}
+      </div>
+
+      {% comment %}
+        Project updates: all docs in _project_updates with project == page.slug
+        We sort them by date (newest first) and only show visibility == "public"
+        on the public-facing project page.
+      {% endcomment %}
+      {% assign all_updates = site.project_updates | where: "project", page.slug %}
+      {% assign sorted_updates = all_updates | sort: "date" | reverse %}
+      {% assign public_updates = sorted_updates | where: "visibility", "public" %}
+
+      {% if public_updates.size > 0 %}
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
+        <section class="updates">
+          <h2 style="font-size:15px; margin-bottom: 8px;">Updates</h2>
+          <ul style="list-style:none; padding-left:0; font-size:13px;">
+            {% for u in public_updates %}
+              <li style="margin-bottom:10px;">
+                <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:#6b7280;">
+                  {{ u.date | date: "%Y-%m-%d" }}
+                </div>
+                {% if u.title %}
+                  <div style="font-weight:500; margin-bottom:2px;">{{ u.title }}</div>
+                {% endif %}
+                <div>
+                  {{ u.content | markdownify }}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+
+
     </main>
   </div>
 </body>
