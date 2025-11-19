@@ -2,29 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ryan Wong – Research Studio</title>
+  <title>Ryan Wong – Projects</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #020617;
-      --bg-elevated: #020617;
-      --surface: #020617;
-      --surface-soft: #020617;
-      --surface-strong: #0f172a;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.1);
-      --accent-strong: #0ea5e9;
-      --text: #e5e7eb;
-      --text-soft: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.25);
-      --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.85);
-      --radius-lg: 22px;
-      --radius-sm: 999px;
-      --radius-card: 24px;
-      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      --transition-fast: 180ms ease-out;
-      --max-width: 1120px;
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --text: #111827;
+      --text-soft: #6b7280;
+      --accent: #d90429;
+      --border: #e5e7eb;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      --max-width: 960px;
     }
 
     * {
@@ -35,11 +24,11 @@
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at top, #0f172a 0, #020617 42%, #020617 100%);
+      background: var(--bg);
       color: var(--text);
       font-family: var(--font-sans);
       -webkit-font-smoothing: antialiased;
-      padding: 32px 16px 64px;
+      padding: 24px 16px 48px;
     }
 
     .page {
@@ -47,104 +36,59 @@
       margin: 0 auto;
     }
 
-    .page-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 5fr) minmax(260px, 3fr);
-      gap: 28px;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 880px) {
-      body {
-        padding: 20px 12px 40px;
-      }
-      .page-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* Header / hero */
-
-    .shell {
-      border-radius: 28px;
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.18), transparent 55%),
-                  linear-gradient(to bottom right, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.96));
-      box-shadow: var(--shadow-soft);
-      padding: 22px 22px 18px;
-      margin-bottom: 20px;
+    header {
       position: sticky;
-      top: 16px;
-      z-index: 5;
-      backdrop-filter: blur(18px);
+      top: 0;
+      z-index: 10;
+      background: var(--bg);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
     }
 
-    @media (max-width: 880px) {
-      .shell {
-        position: static;
-        padding: 18px 18px 16px;
-      }
-    }
-
-    .shell-topline {
+    .top-bar {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      font-size: 11px;
-      text-transform: uppercase;
+    .wordmark {
+      font-size: 18px;
       letter-spacing: 0.16em;
-      color: var(--text-soft);
-      gap: 6px;
-      white-space: nowrap;
+      text-transform: uppercase;
+      color: var(--accent);
     }
 
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #4ade80;
-      box-shadow: 0 0 0 5px rgba(74, 222, 128, 0.25);
-    }
-
-    .shell-links {
+    .nav {
       display: flex;
-      gap: 12px;
+      gap: 16px;
       font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: var(--text-soft);
-      flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
-    .shell-links a {
-      color: inherit;
+    .nav a {
       text-decoration: none;
-      opacity: 0.85;
+      color: inherit;
+      padding-bottom: 2px;
       border-bottom: 1px solid transparent;
-      padding-bottom: 1px;
-      transition: opacity var(--transition-fast), border-color var(--transition-fast);
+      transition: border-color 120ms ease-out, color 120ms ease-out;
     }
 
-    .shell-links a:hover {
-      opacity: 1;
-      border-color: rgba(148, 163, 184, 0.6);
+    .nav a:hover {
+      border-bottom-color: var(--text-soft);
+      color: #111827;
     }
 
-    .hero-row {
+    .hero {
+      padding-top: 14px;
       display: flex;
-      align-items: flex-end;
       justify-content: space-between;
-      gap: 20px;
+      align-items: flex-end;
+      gap: 18px;
     }
 
     .hero-main {
@@ -152,764 +96,368 @@
     }
 
     .hero-title {
-      font-size: 32px;
+      font-size: clamp(26px, 3vw, 30px);
       line-height: 1.1;
-      letter-spacing: -0.05em;
-      margin-bottom: 10px;
-    }
-
-    .hero-title span {
-      color: var(--text-soft);
-      font-weight: 300;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
     }
 
     .hero-sub {
       font-size: 14px;
-      line-height: 1.5;
-      color: var(--text-soft);
-      max-width: 440px;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .tag {
-      font-size: 11px;
-      border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.92);
-      color: #e5e7eb;
-      opacity: 0.9;
-    }
-
-    .hero-cta {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-    }
-
-    .btn-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .btn {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      font-size: 12px;
-      padding: 8px 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: var(--text);
-      background: rgba(15, 23, 42, 0.9);
-      cursor: pointer;
-      transition: background var(--transition-fast), transform var(--transition-fast),
-        box-shadow var(--transition-fast), border-color var(--transition-fast);
-    }
-
-    .btn-primary {
-      background: radial-gradient(circle at top left, var(--accent-strong), #0369a1);
-      border-color: rgba(56, 189, 248, 0.9);
-      box-shadow: 0 18px 30px rgba(56, 189, 248, 0.35);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 30px rgba(15, 23, 42, 0.9);
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 18px 34px rgba(56, 189, 248, 0.45);
-    }
-
-    .btn span.icon {
-      font-size: 14px;
-      opacity: 0.9;
-    }
-
-    .hero-caption {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.23em;
-      color: var(--text-soft);
-      opacity: 0.8;
-    }
-
-    @media (max-width: 640px) {
-      .hero-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .hero-cta {
-        align-items: flex-start;
-      }
-    }
-
-    /* Main content layout */
-
-    .layout {
-      margin-top: 10px;
-      display: grid;
-      grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.2fr);
-      gap: 22px;
-    }
-
-    @media (max-width: 960px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    section {
-      margin-bottom: 18px;
-    }
-
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-label::before {
-      content: "";
-      width: 32px;
-      height: 1px;
-      background: linear-gradient(to right, rgba(148, 163, 184, 0.6), transparent);
-      border-radius: 999px;
-    }
-
-    .card {
-      border-radius: var(--radius-card);
-      border: 1px solid var(--border-subtle);
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
-      padding: 14px 16px 14px;
-      box-shadow: 0 18px 30px rgba(15, 23, 42, 0.7);
-    }
-
-    .card + .card {
-      margin-top: 10px;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .card-title {
-      font-size: 14px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: #e5e7eb;
-    }
-
-    .pill-soft {
-      font-size: 11px;
-      border-radius: 999px;
-      padding: 4px 9px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(15, 23, 42, 0.92);
-      white-space: nowrap;
-    }
-
-    .pill-soft span.dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .card-body {
-      font-size: 13px;
       color: var(--text-soft);
       line-height: 1.6;
     }
 
-    .card-body p + p {
-      margin-top: 6px;
+    .hero-sub code {
+      font-size: 12px;
+      background: #e5e7eb;
+      padding: 1px 4px;
+      border-radius: 4px;
     }
 
-    .card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 14px;
+    .hero-meta {
       font-size: 11px;
-      color: var(--text-soft);
-      margin-top: 7px;
-    }
-
-    .meta-label {
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 10px;
-      color: rgba(148, 163, 184, 0.78);
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .tag-minor {
-      font-size: 11px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
+      letter-spacing: 0.18em;
       color: var(--text-soft);
-      background: rgba(15, 23, 42, 0.92);
+      white-space: nowrap;
     }
 
-    /* Projects grid */
+    @media (max-width: 640px) {
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero-meta {
+        margin-top: 4px;
+      }
+    }
 
-    .grid {
+    main {
+      margin-top: 12px;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 20px 20px 16px;
+    }
+
+    section + section {
+      margin-top: 24px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .project-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .project {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 12px 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
     }
 
     @media (max-width: 720px) {
-      .grid {
+      .project {
         grid-template-columns: minmax(0, 1fr);
       }
     }
 
     .project-title-row {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 4px;
+      gap: 8px;
+      margin-bottom: 2px;
     }
 
-    .project-title-text {
-      font-size: 14px;
+    .project-name {
+      font-size: 15px;
       font-weight: 500;
-      letter-spacing: -0.01em;
+      letter-spacing: 0.02em;
+    }
+
+    .project-name a.project-link-title {
+      text-decoration: none;
+      color: inherit;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+      transition: border-color 120ms ease-out, color 120ms ease-out;
+    }
+
+    .project-name a.project-link-title:hover {
+      color: #111827;
+      border-bottom-color: #111827;
     }
 
     .project-status {
       font-size: 11px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(56, 189, 248, 0.65);
-      background: var(--accent-soft);
-      color: var(--accent-strong);
-      white-space: nowrap;
-    }
-
-    .project-footer {
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .project-link {
-      text-decoration: none;
-      color: var(--accent-strong);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding-bottom: 1px;
-      border-bottom: 1px solid transparent;
-      transition: border-color var(--transition-fast), color var(--transition-fast),
-        transform var(--transition-fast);
-    }
-
-    .project-link:hover {
-      border-color: rgba(56, 189, 248, 0.9);
-      transform: translateY(-0.5px);
-    }
-
-    /* Timeline */
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .timeline-item {
-      padding: 10px 11px;
-      border-radius: 18px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), #020617);
-    }
-
-    .timeline-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      align-items: baseline;
-    }
-
-    .timeline-date {
-      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(148, 163, 184, 0.85);
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
       white-space: nowrap;
     }
 
-    .timeline-title {
+    .project-desc {
       font-size: 13px;
-      font-weight: 500;
-      color: #e5e7eb;
-    }
-
-    .timeline-body {
-      margin-top: 4px;
-      font-size: 12px;
       color: var(--text-soft);
-    }
-
-    .timeline-body ul {
+      line-height: 1.5;
       margin-top: 4px;
-      padding-left: 14px;
-      list-style: disc;
     }
 
-    .timeline-body li + li {
-      margin-top: 2px;
-    }
-
-    /* Small list */
-
-    .list-compact {
-      list-style: none;
-      font-size: 12px;
+    .project-meta {
+      font-size: 11px;
       color: var(--text-soft);
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
-    .list-compact li + li {
-      margin-top: 4px;
+    .project-meta span + span::before {
+      content: "•";
+      padding: 0 6px;
     }
 
-    .pill-subtle {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 10px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      background: rgba(15, 23, 42, 0.92);
-      color: rgba(148, 163, 184, 0.9);
+    .project-links {
+      font-size: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
     }
 
-    .pill-subtle span.dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.9);
-    }
-
-    a.text-link {
-      color: var(--accent-strong);
+    .project-links a {
       text-decoration: none;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.45);
+      color: var(--text-soft);
+      border-bottom: 1px solid transparent;
       padding-bottom: 1px;
+      transition: color 120ms ease-out, border-color 120ms ease-out;
     }
 
-    a.text-link:hover {
-      border-bottom-color: rgba(56, 189, 248, 0.9);
+    .project-links a:hover {
+      color: #111827;
+      border-bottom-color: #111827;
     }
 
-    /* Scrollbar (WebKit) */
+    .project-links span.label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
 
-    ::-webkit-scrollbar {
-      width: 8px;
+    .project-empty {
+      font-size: 13px;
+      color: var(--text-soft);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
     }
-    ::-webkit-scrollbar-track {
-      background: #020617;
+
+    footer {
+      max-width: var(--max-width);
+      margin: 12px auto 0;
+      font-size: 11px;
+      color: var(--text-soft);
     }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(30, 64, 175, 0.7);
-      border-radius: 999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(59, 130, 246, 0.85);
+
+    .noscript-warning {
+      font-size: 13px;
+      color: var(--text-soft);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- Header shell / hero -->
-    <header class="shell">
-      <div class="shell-topline">
-        <div class="badge-pill">
-          <span class="badge-dot"></span>
-          <span>Research Studio</span>
-        </div>
-        <div class="shell-links">
-          <!-- TODO: update these links -->
-          <a href="#projects">Projects</a>
-          <a href="#notebook">Notebook</a>
-          <a href="#meetings">Meetings</a>
-          <a href="#reading">Reading</a>
-        </div>
+    <header>
+      <div class="top-bar">
+        <div class="wordmark">Ryan Wong</div>
+        <nav class="nav">
+          <a href="#active">Active</a>
+          <a href="#incubating">Incubating</a>
+          <a href="#archive">Archive</a>
+        </nav>
       </div>
-
-      <div class="hero-row">
+      <div class="hero">
         <div class="hero-main">
-          <h1 class="hero-title">
-            Ryan Wong<span> / computational chemistry & ML</span>
-          </h1>
+          <h1 class="hero-title">Project index</h1>
           <p class="hero-sub">
-            PhD student exploring equivariant neural networks, molecular simulations, and
-            binding affinity prediction. This space tracks ongoing projects, experiments,
-            and day-to-day progress — a design studio for research.
+            All projects live in <code>projects.yaml</code>. Edit that file and run
+            <code>python3 build_projects.py</code> to regenerate <code>projects.json</code>.
+            Click a project title to open its detail page.
           </p>
-          <div class="hero-tags">
-            <!-- TODO: tweak tags -->
-            <span class="tag">PhD · University of Chicago</span>
-            <span class="tag">Equivariant GNNs</span>
-            <span class="tag">Protein–ligand binding</span>
-          </div>
         </div>
-
-        <div class="hero-cta">
-          <div class="btn-row">
-            <a href="#projects" class="btn btn-primary">
-              <span class="icon">●</span>
-              <span>View active projects</span>
-            </a>
-            <a href="#notebook" class="btn">
-              <span>Today’s log</span>
-              <span class="icon">↘</span>
-            </a>
-          </div>
-          <div class="hero-caption">Last updated · Nov 19, 2025</div>
+        <div class="hero-meta" id="last-updated">
+          <!-- filled from JSON -->
         </div>
       </div>
     </header>
 
-    <!-- Main content -->
-    <main class="layout">
-      <!-- Left column: Now, Projects, Notebook -->
-      <div>
-        <!-- NOW / DASHBOARD -->
-        <section id="now">
-          <div class="section-label">Now</div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Current focus</div>
-              <div class="pill-soft">
-                <span class="dot"></span>
-                This week
-              </div>
+    <main>
+      <section id="active">
+        <div class="section-title">Active projects</div>
+        <div class="project-list" id="active-list">
+          <noscript>
+            <div class="noscript-warning">
+              This page expects JavaScript to build the project list from <code>projects.json</code>.
+              Enable JavaScript, or open <code>projects.json</code> directly to view and edit projects.
             </div>
-            <div class="card-body">
-              <!-- TODO: update focus bullets -->
-              <p>
-                Sharpening the binding-affinity model and writing up results. Emphasis on
-                understanding generalization vs. overfitting across PDBBind splits.
-              </p>
-              <div class="card-meta">
-                <span><span class="meta-label">Threads</span> model training · analysis · writing</span>
-              </div>
-            </div>
-          </div>
-        </section>
+          </noscript>
+        </div>
+      </section>
 
-        <!-- PROJECTS -->
-        <section id="projects">
-          <div class="section-label">Projects</div>
-          <div class="grid">
-            <!-- Project 1 -->
-            <article class="card">
-              <div class="project-title-row">
-                <h2 class="project-title-text">State Couplings for Binding Affinity</h2>
-                <span class="project-status">In progress</span>
-              </div>
-              <div class="card-body">
-                <p>
-                  Equivariant message-passing architecture comparing apo vs holo protein states
-                  to predict binding affinity from state differences.
-                </p>
-                <div class="tag-row">
-                  <span class="tag-minor">equivariant GNN</span>
-                  <span class="tag-minor">binding affinity</span>
-                  <span class="tag-minor">PDBBind</span>
-                </div>
-              </div>
-              <div class="project-footer">
-                <span>Milestone: validate on CASF-2016</span>
-                <!-- TODO: link to repo or internal doc -->
-                <a href="#" class="project-link">
-                  project notes <span>↗</span>
-                </a>
-              </div>
-            </article>
+      <section id="incubating">
+        <div class="section-title">Incubating / on deck</div>
+        <div class="project-list" id="incubating-list"></div>
+      </section>
 
-            <!-- Project 2 -->
-            <article class="card">
-              <div class="project-title-row">
-                <h2 class="project-title-text">Alanine Dipeptide CV Prototype</h2>
-                <span class="project-status" style="border-color: rgba(74, 222, 128, 0.7); color:#4ade80;">
-                  Experiment
-                </span>
-              </div>
-              <div class="card-body">
-                <p>
-                  Minimal testbed: can a state-comparison network recover a clean
-                  one-dimensional collective variable between metastable basins?
-                </p>
-                <div class="tag-row">
-                  <span class="tag-minor">molecular dynamics</span>
-                  <span class="tag-minor">collective variables</span>
-                </div>
-              </div>
-              <div class="project-footer">
-                <span>Next: run longer trajectories</span>
-                <a href="#" class="project-link">
-                  experiment log <span>↗</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Project 3 -->
-            <article class="card">
-              <div class="project-title-row">
-                <h2 class="project-title-text">Equivariant Pooling & Coarsening</h2>
-                <span class="project-status" style="border-color: rgba(248, 250, 252, 0.5); color:#e5e7eb;">
-                  Concept
-                </span>
-              </div>
-              <div class="card-body">
-                <p>
-                  Designing pooling layers that respect SO(3) symmetry and learn relevant
-                  length scales for protein–ligand graphs.
-                </p>
-                <div class="tag-row">
-                  <span class="tag-minor">graph coarsening</span>
-                  <span class="tag-minor">SO(3) equivariance</span>
-                </div>
-              </div>
-              <div class="project-footer">
-                <span>Sketching theory + toy experiments</span>
-                <a href="#" class="project-link">
-                  scratchpad <span>↗</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Project 4 -->
-            <article class="card">
-              <div class="project-title-row">
-                <h2 class="project-title-text">Teaching & Course Materials</h2>
-                <span class="project-status" style="border-color: rgba(248, 250, 252, 0.4); color:#e5e7eb;">
-                  Ongoing
-                </span>
-              </div>
-              <div class="card-body">
-                <p>
-                  Mechanics and ML in chemistry: solution sets, Jupyter notebooks, and demos
-                  that might eventually become a public resource.
-                </p>
-                <div class="tag-row">
-                  <span class="tag-minor">teaching</span>
-                  <span class="tag-minor">physics</span>
-                  <span class="tag-minor">ML</span>
-                </div>
-              </div>
-              <div class="project-footer">
-                <span>Current: finalize exam solutions</span>
-                <a href="#" class="project-link">
-                  teaching notes <span>↗</span>
-                </a>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <!-- LAB NOTEBOOK -->
-        <section id="notebook">
-          <div class="section-label">Lab notebook</div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Recent logs</div>
-              <span class="pill-subtle">
-                <span class="dot"></span>
-                source of truth
-              </span>
-            </div>
-            <div class="card-body">
-              <p style="margin-bottom: 6px;">
-                Lightweight daily notes: what was tried, what broke, what moved.
-                Full logs live in Markdown / Obsidian; this is the curated front.
-              </p>
-              <div class="timeline">
-                <!-- Log item 1 -->
-                <div class="timeline-item">
-                  <div class="timeline-row">
-                    <span class="timeline-date">Nov 19 · 2025</span>
-                    <span class="timeline-title">Exam notes + loss functions</span>
-                  </div>
-                  <div class="timeline-body">
-                    <ul>
-                      <li>Consolidated cheat sheet on PCA, VAEs, diffusion, transformers.</li>
-                      <li>Sketched how these relate to current research directions.</li>
-                      <li>Flag: revisit loss design for binding model after exams.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <!-- Log item 2 -->
-                <div class="timeline-item">
-                  <div class="timeline-row">
-                    <span class="timeline-date">Nov 18 · 2025</span>
-                    <span class="timeline-title">Training stability pass</span>
-                  </div>
-                  <div class="timeline-body">
-                    <ul>
-                      <li>Checked LR schedule + warmup on multi-GPU setup.</li>
-                      <li>Tracked runs on CASF-2016; early signs of overfitting.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <!-- Log item 3 -->
-                <div class="timeline-item">
-                  <div class="timeline-row">
-                    <span class="timeline-date">Nov 16 · 2025</span>
-                    <span class="timeline-title">Surface extraction reading</span>
-                  </div>
-                  <div class="timeline-body">
-                    <ul>
-                      <li>Collected references on surface extraction & interface graphs.</li>
-                      <li>Drafted notes for “surface extraction” conversation thread.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div style="margin-top: 8px; font-size: 11px; color: var(--text-soft);">
-                <!-- TODO: link this to your real notes repo -->
-                Full log: <a href="#" class="text-link">/notes/daily</a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- Right column: meetings, reading, system -->
-      <div>
-        <!-- MEETINGS -->
-        <section id="meetings">
-          <div class="section-label">Meetings & rhythm</div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Weekly structure</div>
-            </div>
-            <div class="card-body">
-              <ul class="list-compact">
-                <!-- TODO: customize schedule -->
-                <li>Mon — project deep work, code / experiments.</li>
-                <li>Tue — advisor sync + writing hour afterwards.</li>
-                <li>Wed — teaching prep + grading block.</li>
-                <li>Thu — reading + model diagnostics.</li>
-                <li>Fri — open slot for debugging & exploration.</li>
-              </ul>
-              <div class="card-meta" style="margin-top: 10px;">
-                <span class="meta-label">Upcoming meetings</span>
-              </div>
-              <ul class="list-compact">
-                <li>
-                  <strong>Advisor 1:1</strong> · Thu 2:00–3:00 · focus: latest model runs
-                </li>
-                <li>
-                  <strong>Group meeting</strong> · Fri 11:00–12:00 · topic: MD analysis
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- READING -->
-        <section id="reading">
-          <div class="section-label">Reading</div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">On the desk</div>
-            </div>
-            <div class="card-body">
-              <ul class="list-compact">
-                <li>
-                  <strong>Phase-space overlap measures</strong> — thinking about how overlap
-                  constraints might inspire model diagnostics.
-                </li>
-                <li>
-                  <strong>Doob & Schrödinger bridge papers</strong> — ideas for controlled
-                  dynamics & enhanced sampling.
-                </li>
-                <li>
-                  <strong>Graph transformer for molecular systems</strong> — compare with current
-                  equivariant MPNNs.
-                </li>
-              </ul>
-              <div style="margin-top: 8px; font-size: 11px; color: var(--text-soft);">
-                Reading queue: <a href="#" class="text-link">/notes/reading-list</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- SYSTEM -->
-        <section id="system">
-          <div class="section-label">System</div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">How this site works</div>
-            </div>
-            <div class="card-body">
-              <p>
-                This page is the organized front of a messier notes system (Markdown / Obsidian
-                / Jupyter). Projects, logs, and reading lists here mirror those internal notes.
-              </p>
-              <p style="margin-top: 6px;">
-                Every week:
-              </p>
-              <ul class="list-compact">
-                <li>Update <em>Current focus</em> and project milestones.</li>
-                <li>Summarize the best 2–3 daily logs into the notebook timeline.</li>
-                <li>Prune the reading list to what you actually care about.</li>
-              </ul>
-              <div class="card-meta" style="margin-top: 8px;">
-                <span><span class="meta-label">Backend</span> static HTML · Git + Markdown</span>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+      <section id="archive">
+        <div class="section-title">Archive</div>
+        <div class="project-list" id="archive-list"></div>
+      </section>
     </main>
+
+    <footer>
+      To update projects, edit <code>projects.yaml</code>, then run
+      <code>python3 build_projects.py</code> to regenerate <code>projects.json</code>.
+      Commit all three: <code>index.html</code>, <code>projects.yaml</code>, <code>projects.json</code>.
+    </footer>
   </div>
+
+  <script>
+    async function loadProjects() {
+      try {
+        const response = await fetch('projects.json', { cache: 'no-store' });
+        if (!response.ok) {
+          console.error('Failed to load projects.json:', response.status);
+          return;
+        }
+        const data = await response.json();
+        renderProjects(data);
+      } catch (err) {
+        console.error('Error loading projects.json:', err);
+      }
+    }
+
+    function createProjectElement(project) {
+      const article = document.createElement('article');
+      article.className = 'project';
+
+      const left = document.createElement('div');
+      const titleRow = document.createElement('div');
+      titleRow.className = 'project-title-row';
+
+      const nameEl = document.createElement('div');
+      nameEl.className = 'project-name';
+
+      if (project.slug) {
+        const link = document.createElement('a');
+        link.className = 'project-link-title';
+        link.href = 'project.html?slug=' + encodeURIComponent(project.slug);
+        link.textContent = project.title || '';
+        nameEl.appendChild(link);
+      } else {
+        nameEl.textContent = project.title || '';
+      }
+
+      const statusEl = document.createElement('div');
+      statusEl.className = 'project-status';
+      statusEl.textContent = project.stage || project.status || '';
+
+      titleRow.appendChild(nameEl);
+      titleRow.appendChild(statusEl);
+
+      const descEl = document.createElement('p');
+      descEl.className = 'project-desc';
+      descEl.textContent = project.summary || '';
+
+      left.appendChild(titleRow);
+      left.appendChild(descEl);
+
+      if (Array.isArray(project.meta) && project.meta.length > 0) {
+        const metaEl = document.createElement('div');
+        metaEl.className = 'project-meta';
+        project.meta.forEach((m) => {
+          const span = document.createElement('span');
+          span.textContent = m;
+          metaEl.appendChild(span);
+        });
+        left.appendChild(metaEl);
+      }
+
+      const right = document.createElement('div');
+      right.className = 'project-links';
+
+      const label = document.createElement('span');
+      label.className = 'label';
+      label.textContent = 'Links';
+      right.appendChild(label);
+
+      if (Array.isArray(project.links)) {
+        project.links.forEach((link) => {
+          if (!link.url) return;
+          const a = document.createElement('a');
+          a.href = link.url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = link.label || link.url;
+          right.appendChild(a);
+        });
+      }
+
+      article.appendChild(left);
+      article.appendChild(right);
+
+      return article;
+    }
+
+    function renderSection(listId, projects) {
+      const container = document.getElementById(listId);
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      if (!projects || projects.length === 0) {
+        const div = document.createElement('div');
+        div.className = 'project-empty';
+        div.textContent = 'No projects listed here yet.';
+        container.appendChild(div);
+        return;
+      }
+
+      projects.forEach((project) => {
+        const el = createProjectElement(project);
+        container.appendChild(el);
+      });
+    }
+
+    function renderProjects(data) {
+      if (data.lastUpdated) {
+        const metaEl = document.getElementById('last-updated');
+        if (metaEl) {
+          metaEl.textContent = 'Last updated · ' + data.lastUpdated;
+        }
+      }
+
+      const projects = Array.isArray(data.projects) ? data.projects : [];
+
+      const active = projects.filter((p) => p.status === 'active');
+      const incubating = projects.filter((p) => p.status === 'incubating');
+      const archive = projects.filter((p) => p.status === 'archive');
+
+      renderSection('active-list', active);
+      renderSection('incubating-list', incubating);
+      renderSection('archive-list', archive);
+    }
+
+    loadProjects();
+  </script>
 </body>
 </html>
