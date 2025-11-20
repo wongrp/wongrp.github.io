@@ -10,19 +10,25 @@ meta:
   - ""
 links:
   - label: TFEP notes 
-    url: ""
+    url: "#"
   - label: CV learning notes 
     url: "#"
 
 # shown only on your private dashboard
 private_links:
-  - label: Overleaf link 
+  - label: Overleaf notes 
     url: https://www.overleaf.com/read/ggdtmmbdbpbq#4485ea
 
 
 private_notes: |
-  - Todo: rerun CASF-2016 with new pooling.
-  - Check consistency of apo/holo preprocessing.
+  - placeholder
 ---
 
-Intuitively, the state coupling idea identifies *overlaps* between states. 
+Intuitively, the state coupling idea identifies *overlaps* between states. I want to know to what extent tensor products can help identify overlaps in configuration space and how that corresponds to overlaps in phase space. So I have to start with how phase space overlaps are a problem in the first place. [Wu and Kofke's 2005 paper](https://pubs.aip.org/aip/jcp/article/123/5/054103/905489/Phase-space-overlap-measures-I-Fail-safe-bias) is a great place to start and here are [my notes on it](../pdf_docs/Notes_on_phase_space_overlap.pdf). 
+
+
+
+FEP benefits from machine learning. Notes on that: [TFEP notes](../pdf_docs/Notes_on_TFEP.pdf) and
+[CV learning notes](/path/to/cv-notes) for more details.
+
+You can also check the [Overleaf page](https://www.overleaf.com/read/ggdtmmbdbpbq#4485ea) which contains all these notes.
