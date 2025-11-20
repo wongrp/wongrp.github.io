@@ -1,27 +1,24 @@
 ---
 layout: project
-title: Learning collective variables
-slug: ala-dipeptide-cv
+title: TFEP and CV-learning
+slug: tfep 
 status: active
-stage: Experiment
-summary: >
-  Minimal MD system to test whether a state-comparison network can recover
-  a low-dimensional collective variable separating metastable basins.
+stage: Lit review 
+summary: 
+    Figuring out how to apply GNN to MD. So far candidates include TFEP or CV. learning. 
 meta:
-  - Trajectories generated
-  - Analysis in progress
+  - ""
 links:
-  - label: Overleaf notes / draft
+  - label: TFEP notes 
     url: ""
-  - label: Analysis notebook
+  - label: CV learning notes 
     url: "#"
 
 # shown only on your private dashboard
 private_links:
-  - label: Internal notes doc
-    url: "#"
-  - label: Scratch notebook
-    url: "#"
+  - label: Overleaf link 
+    url: https://www.overleaf.com/read/ggdtmmbdbpbq#4485ea
+
 
 private_notes: |
   - Todo: rerun CASF-2016 with new pooling.
